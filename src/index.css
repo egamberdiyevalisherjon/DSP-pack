@@ -1,0 +1,17 @@
+body {
+  background-color: #eee;
+}
+
+.App {
+  display: flex;
+  align-items: start;
+}
+
+.App > div {
+  flex: 1;
+}
+
+.App > div:first-of-type {
+  position: sticky;
+  top: 10px;
+}
