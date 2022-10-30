@@ -1,6 +1,7 @@
 import usePackRectangles from "./Hooks/usePackRectangles";
 import { useMemo, useState } from "react";
 import Canvas from "./components/Canvas";
+
 function App() {
   const [field, setField] = useState({ w: 600, h: 600 });
   const [rects, setRects] = useState([
@@ -11,6 +12,14 @@ function App() {
   ]);
   const props = useMemo(() => [rects, field], [rects, field]);
   const pieces = usePackRectangles(...props);
+
+  const handleChange = (index) => (e) => {
+    const name = e.target.name;
+    const value = +e.target.value;
+    let newState = [...rects];
+    newState[index][name] = value >= field[name] ? field[name] : value;
+    setRects(newState);
+  };
 
   return (
     <div className="App">
@@ -41,24 +50,20 @@ function App() {
         {rects.map((rect, index) => (
           <div key={index}>
             <input
+              name="w"
               type="number"
               value={rect.w}
               min={0}
-              onChange={(e) => {
-                let newState = [...rects];
-                newState[index].w = +e.target.value;
-                setRects(newState);
-              }}
+              max={field.w}
+              onChange={handleChange(index)}
             />
             <input
               type="number"
+              name="h"
               value={rect.h}
               min={0}
-              onChange={(e) => {
-                let newState = [...rects];
-                newState[index].h = +e.target.value;
-                setRects(newState);
-              }}
+              max={field.h}
+              onChange={handleChange(index)}
             />
           </div>
         ))}
