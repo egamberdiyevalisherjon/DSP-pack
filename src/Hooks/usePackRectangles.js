@@ -5,7 +5,9 @@ function pack({ w, h, rects }) {
   const result = packer({
     binHeight: w,
     binWidth: h,
-    items: rects.filter((rect) => rect.width && rect.height),
+    items: rects.filter(
+      (rect) => rect.width && rect.height && rect.width <= w && rect.height <= h
+    ),
   });
 
   return result;

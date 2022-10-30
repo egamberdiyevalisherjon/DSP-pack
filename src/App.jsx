@@ -38,7 +38,7 @@ function App() {
         <button
           type="button"
           onClick={() => {
-            setRects([...rects, { w: "", h: "" }]);
+            setRects([...rects, { width: "", height: "" }]);
           }}
         >
           Add
