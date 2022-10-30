@@ -1,43 +1,22 @@
 import { useEffect, useState } from "react";
-import pack from "./pack";
+import { packer } from "./pack";
 
-const calculate = (rects, field) => {
-  let pieces = [];
-  let uncoordinatedBoxes = [];
+function pack({ w, h, rects }) {
+  const result = packer({
+    binHeight: w,
+    binWidth: h,
+    items: rects.filter((rect) => rect.width && rect.height),
+  });
 
-  const test = (boxes, field) => {
-    const a = [];
-    pack(boxes, field);
-    const coordinatedBoxes = boxes.filter((e) => {
-      if (!Number.isInteger(e.x) && !Number.isInteger(e.y)) {
-        a.push(e);
-        return false;
-      }
-
-      return true;
-    });
-    uncoordinatedBoxes = a;
-    pieces.push(coordinatedBoxes);
-
-    if (uncoordinatedBoxes.length > 0) {
-      test(uncoordinatedBoxes, field);
-    }
-
-    return pieces;
-  };
-
-  test(
-    rects.map((e) => ({ ...e })),
-    field
-  );
-
-  return pieces;
-};
+  return result;
+}
 
 const usePackRectangles = (rects, field = { w: 600, h: 600 }) => {
   const [pieces, setPieces] = useState([]);
-
-  useEffect(() => setPieces(calculate(rects, field)), [rects, field]);
+  useEffect(
+    () => setPieces(pack({ w: field.w, h: field.h, rects })),
+    [rects, field]
+  );
 
   return pieces;
 };

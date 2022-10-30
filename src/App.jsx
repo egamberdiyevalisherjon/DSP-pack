@@ -1,15 +1,11 @@
 import usePackRectangles from "./Hooks/usePackRectangles";
 import { useMemo, useState } from "react";
 import Canvas from "./components/Canvas";
+// import { packer } from "guillotine-packer/dist/guillotine-packer.es5";
 
 function App() {
   const [field, setField] = useState({ w: 600, h: 600 });
-  const [rects, setRects] = useState([
-    { w: 100, h: 100 },
-    { w: 200, h: 200 },
-    { w: 300, h: 300 },
-    { w: 600, h: 600 },
-  ]);
+  const [rects, setRects] = useState([{ width: "", height: "" }]);
   const props = useMemo(() => [rects, field], [rects, field]);
   const pieces = usePackRectangles(...props);
 
@@ -50,17 +46,17 @@ function App() {
         {rects.map((rect, index) => (
           <div key={index}>
             <input
-              name="w"
+              name="width"
               type="number"
-              value={rect.w}
+              value={rect.width}
               min={0}
               max={field.w}
               onChange={handleChange(index)}
             />
             <input
               type="number"
-              name="h"
-              value={rect.h}
+              name="height"
+              value={rect.height}
               min={0}
               max={field.h}
               onChange={handleChange(index)}

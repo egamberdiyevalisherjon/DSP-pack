@@ -6,7 +6,6 @@ const Canvas = (props) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    //Our first draw
     const r = 1;
 
     const cw = field.w;
@@ -22,15 +21,15 @@ const Canvas = (props) => {
     context.lineWidth = 0.5;
 
     for (const box of piece) {
-      const text = `${box.w}x${box.h}`;
+      const text = `${box.width}x${box.height}`;
       context.beginPath();
       context.fillStyle = `white`;
-      context.rect(box.x * r, box.y * r, box.w * r, box.h * r);
+      context.rect(box.x * r, box.y * r, box.width * r, box.height * r);
       context.fill();
       context.font = "20px Arial";
       context.fillStyle = "black";
       context.textAlign = "center";
-      context.fillText(text, box.x + box.w / 2, box.y + box.h / 2);
+      context.fillText(text, box.x + box.width / 2, box.y + box.height / 2);
       context.stroke();
     }
   }, [piece]);
