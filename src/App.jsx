@@ -4,8 +4,13 @@ import Canvas from "./components/Canvas";
 // import { packer } from "guillotine-packer/dist/guillotine-packer.es5";
 
 function App() {
-  const [field, setField] = useState({ w: 600, h: 600 });
-  const [rects, setRects] = useState([{ width: 0, height: 0 }]);
+  const [field, setField] = useState({ w: 1000, h: 600 });
+  const [rects, setRects] = useState([
+    { width: 500, height: 500 },
+    { width: 300, height: 500 },
+    { width: 200, height: 200 },
+    { width: 100, height: 200 },
+  ]);
   const props = useMemo(() => [rects, field], [rects, field]);
   const pieces = usePackRectangles(...props);
 
