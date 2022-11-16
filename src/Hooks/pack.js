@@ -60,13 +60,6 @@ function __spreadArrays() {
   return r;
 }
 
-var s = 1000;
-var m = s * 60;
-var h = m * 60;
-var d = h * 24;
-var w = d * 7;
-var y = d * 365.25;
-
 var createSplitRectangle = function (rectangle) {
   return __assign(__assign({}, rectangle), { splitFrom: rectangle.id });
 };
@@ -482,8 +475,6 @@ function PackStrategy(_a) {
           })
         );
       };
-      var originalMax = getBiggestSplitRectangle(originalOption);
-      var rotatedMax = getBiggestSplitRectangle(rotatedOption);
       if (
         getBiggestSplitRectangle(originalOption) >=
         getBiggestSplitRectangle(rotatedOption)
@@ -609,6 +600,7 @@ function Packer(_a, _b) {
     sortStrategies,
     [SortDirection.ASC, SortDirection.DESC]
   );
+
   return allStrategies
     .map(function (_a) {
       var selectionStrategy = _a[0],
@@ -628,11 +620,7 @@ function Packer(_a, _b) {
       });
     })
     .reduce(function (bestCompressed, packResult) {
-      var splitStrategy = packResult.splitStrategy,
-        sortStrategy = packResult.sortStrategy,
-        selectionStrategy = packResult.selectionStrategy,
-        sortOrder = packResult.sortOrder,
-        packedItems = packResult.packedItems;
+      var packedItems = packResult.packedItems;
 
       if (!bestCompressed || packedItems.length < bestCompressed.length) {
         return packedItems;

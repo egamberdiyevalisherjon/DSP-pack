@@ -1,5 +1,6 @@
 body {
   background-color: #eee;
+  font-family: sans-serif;
 }
 
 .App {
@@ -14,4 +15,28 @@ body {
 .App > div:first-of-type {
   position: sticky;
   top: 10px;
+}
+
+.canvas-wrapper {
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+
+.width-of-canvas {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.height-of-canvas {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  writing-mode: vertical-lr;
 }

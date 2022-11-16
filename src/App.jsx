@@ -5,7 +5,7 @@ import Canvas from "./components/Canvas";
 
 function App() {
   const [field, setField] = useState({ w: 600, h: 600 });
-  const [rects, setRects] = useState([{ width: "", height: "" }]);
+  const [rects, setRects] = useState([{ width: 0, height: 0 }]);
   const props = useMemo(() => [rects, field], [rects, field]);
   const pieces = usePackRectangles(...props);
 
@@ -38,7 +38,7 @@ function App() {
         <button
           type="button"
           onClick={() => {
-            setRects([...rects, { width: "", height: "" }]);
+            setRects([...rects, { width: 0, height: 0 }]);
           }}
         >
           Add
